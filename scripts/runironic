@@ -18,4 +18,10 @@ if [[ "$IRONIC_TLS_SETUP" == "true"  && "${RESTART_CONTAINER_CERTIFICATE_UPDATED
     done &
 fi
 
+CUSTOM_CERT_FILE=/etc/pki/ca-trust/source/anchors/custom_verify_ca.crt
+
+if [ -f "$CUSTOM_CERT_FILE" ]; then
+    update-ca-trust
+fi
+
 exec /usr/bin/ironic
